@@ -65,5 +65,50 @@ namespace SelectSort
             // zwrócenie licznika opercji dominujących
             return LicznikOperacjiDominujących;
         }
+        // deklaracja metody QuickSort
+        static public ushort QuickSort(ref float[] T, ushort d, ushort g)
+        {
+            // deklaracje lokalne
+            ushort licznik = 0;
+            ushort i = d;
+            ushort j = g;
+            float PrzestawianyElement;
+            // wylosowanie elementu przedziału tablicy na dwie części
+            float x = T[(d + g) / 2];
+            // indeks "wylosowanego" elementu
+            int s = (d + g) / 2;
+            // "przestawianie porządkujące" elementów tablicy względem elementu X
+            do
+            {
+                // uruchomienie lewego analizatora
+                while (T[i] < X)
+                {
+                    i++;
+                    licznik++;
+                }
+                while (T[j] > X)
+                {
+                    j--;
+                    licznik++;
+                }
+                // oba analizatory skończyły swoją pracę
+                // czyli musimy wymienić elementy tablicy z pozycji i oraz j
+                if (i <= j)
+                {
+                    PrzestawianyElement = T[i];
+                    T[i] = T[j];
+                    T[j] = PrzestawianyElement;
+                    // musimy przesunąć indeksy dla obydwu analizatorów
+                    i++;
+                    j--;
+                }
+            } while (i < j);
+            // rekurencyjne wywołanie algorytmu QuickSort z sumowanych operacji
+            if (d < j)
+                licznik += QuickSort(ref T, d, j);
+            if (i < g)
+                licznik += QuickSort(ref T, i, g);
+            return licznik;
+        }
     }
 }
